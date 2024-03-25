@@ -2,9 +2,20 @@
 
 const express=require ('express')
 const cors=require('cors')
-const connectDB=require('../back-end/Config/connectDB')
-const app=express()
+const mongoose= require('mongoose')
+// const connectDB=require('../back-end/Config/connectDB')
 require('dotenv').config()
+
+const connectDB=async()=>{
+    try {
+        await mongoose.connect(process.env.URI)
+        console.log('db connected...')
+    } catch (error) {
+        console.log(error)
+    }
+}
+connectDB()
+const app=express()
 const port =process.env.port
 connectDB()
 app.use(express.json())
